@@ -12,7 +12,7 @@ struct FenwickTree
     FenwickTree(int m)
     {
         n = m;
-        t.resize(2*n+1,0);
+        t.resize(n+1,0);
     }
  
     void update(int idx, int x)
