@@ -4,6 +4,40 @@ using namespace std;
   #define endl "\n"
 #define int long long 
 
+
+int cost(int c ,vector<int> &v)
+{
+    int ans = 0;
+
+    for(int i = 0; i < v.size(); i++)
+    {
+        ans += abs(v[i]-c);
+    }
+    return ans;
+}
+
+int bs(vector<int> &v)
+{
+    sort(v.begin(),v.end());
+    int low = v[0];
+    int high = v[v.size()-1];
+
+    while(low <= high)
+    {
+        int mid = low + (high-low)/2;
+        if(cost(mid,v) <= cost(mid+1,v))
+        {
+           high = mid - 1;
+        }
+        else
+        {
+           low = mid + 1;
+        }
+    }
+
+    return low;
+}
+
 int32_t main()
 {
 
@@ -26,16 +60,8 @@ int32_t main()
     }
 
     
-    sort(v.begin(),v.end());
-    int ans = 0;
-    int median = v[n/2];
+    cout << cost(bs(v),v);
 
-    for(int i = 0; i < n; i++)
-    {
-        ans += abs(median - v[i]);
-    }
-
-    cout << ans;
 
 
     return 0;
